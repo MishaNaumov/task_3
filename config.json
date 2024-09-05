@@ -1,5 +1,5 @@
 {
-  "url_basic_authorization_1": "https://the-internet.herokuapp.com/basic_auth",
+  "url_basic_authorization_1": "https://{}:{}@the-internet.herokuapp.com/basic_auth",
   "url_alerts_2_3": "https://the-internet.herokuapp.com/javascript_alerts",
   "url_alerts_ContexClick_4": "https://the-internet.herokuapp.com/context_menu",
   "url_actions_5": "https://the-internet.herokuapp.com/horizontal_slider",

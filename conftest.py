@@ -1,7 +1,7 @@
 from selenium.webdriver.chrome.options import Options
 from utils.json_utils import JsonUtils
-# from webdriver import WebDriver
-from selenium import webdriver
+from browser import Browser
+
 
 import pytest
 
@@ -11,8 +11,6 @@ def driver():
     options = Options()
     for item in JsonUtils.get_attribute("options"):
         options.add_argument(item)
-    web_chrome = webdriver.Chrome(options)
+    web_chrome = Browser(options)
 
     return web_chrome
-    # yield web_chrome
-    # WebDriver.quit()
