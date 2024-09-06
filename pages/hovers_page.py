@@ -1,5 +1,5 @@
 from pages.base_page import BasePage
 
 
-class ActionPage(BasePage):
+class HoversPage(BasePage):
     pass

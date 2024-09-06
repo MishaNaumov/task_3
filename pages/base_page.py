@@ -19,3 +19,4 @@ class BasePage:
             return True
         except selenium.common.TimeoutException:
             return False
+

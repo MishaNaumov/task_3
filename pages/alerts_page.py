@@ -5,6 +5,7 @@ from elements.label import Label
 
 class AlertsPage(BasePage):
     UNIQUE_LOC = "//button[@onclick='jsAlert()']"
+
     ALERT_BUTTON_LOC = "//button[@onclick='jsAlert()']"
     CONFIRM_BUTTON_LOC = "//button[@onclick='jsConfirm()']"
     PROMPT_BUTTON_LOC = "//button[@onclick='jsPrompt()']"
@@ -12,6 +13,9 @@ class AlertsPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
+
+        # self.unique_element = Button(self.driver, self.UNIQUE_LOC,
+        #                            description="Alert page -> Alert button")
 
         self.alert_button = Button(self.driver, self.ALERT_BUTTON_LOC,
                                    description="Alert page -> Alert button")
@@ -34,5 +38,7 @@ class AlertsPage(BasePage):
 
     def get_text_result(self):
         return self.result_label.get_text()
+
+
 
 

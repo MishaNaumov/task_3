@@ -29,16 +29,28 @@ class BaseElement:
     def click(self):
         self.clickable_wait.click()
 
-    def right_click(self, element):
-        temp = self.driver.driver.find_element(By.XPATH, element)
+    def get_text(self):
+        return self.presence_wait.text
+
+    def get_attribute(self, arg):
+        return self.driver.driver.find_element(By.XPATH, self.loc).\
+            get_attribute(arg)
+
+    def right_click(self):
+        temp = self.driver.driver.find_element(By.XPATH, self.loc)
         action = ActionChains(self.driver.driver)
         action.context_click(temp).perform()
 
-    def double_click(self, element):
-        temp = self.driver.driver.find_element(By.XPATH, element)
+    def double_click(self):
+        temp = self.driver.driver.find_element(By.XPATH, self.loc)
         action = ActionChains(self.driver.driver)
         action.double_click(temp).perform()
 
-    def get_text(self):
-        return self.presence_wait.text
+    def click_and_hole(self, value):
+        temp = self.driver.driver.find_element(By.XPATH, self.loc)
+        action = ActionChains(self.driver.driver)
+        action.click_and_hold(temp).move_by_offset(value, 0).release().perform()
+
+
+
 

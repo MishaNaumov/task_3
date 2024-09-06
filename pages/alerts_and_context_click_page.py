@@ -21,7 +21,7 @@ class AlertsContextPage(BasePage):
                         "Alert + Context page title")
 
     def click_field(self):
-        self.field_web_element.right_click(self.FIELD_LOC)
+        self.field_web_element.right_click()
 
     def is_alert_closed(self):
         try:
