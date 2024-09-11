@@ -2,21 +2,23 @@ from pages.base_page import BasePage
 from elements.input import Input
 from elements.label import Label
 import random
-import math
 
 
 class ActionsPage(BasePage):
     UNIQUE_LOC = "//*[@id='content']//input"
+
     ACTIONS_INPUT_LOC = "//*[@id='content']//input"
-    VALUE_LOC = "//*[@id='range']"
+    VALUE_LABEL_LOC = "//*[@id='range']"
 
     def __init__(self, driver):
         super().__init__(driver)
 
+        self.unique_element = Input(self.driver, self.UNIQUE_LOC,
+                                    description="Actions page -> Actions input")
+
         self.actions_input = Input(self.driver, self.ACTIONS_INPUT_LOC,
                                    description="Actions page -> Actions input")
-
-        self.value_label = Label(self.driver, self.VALUE_LOC,
+        self.value_label = Label(self.driver, self.VALUE_LABEL_LOC,
                                    description="Actions page -> Value label")
 
     def random_value(self):

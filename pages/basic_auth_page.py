@@ -3,12 +3,12 @@ from elements.label import Label
 
 
 class BasicAuthPage(BasePage):
-    RESULT_LOC = "//*[@id='content']//p"
+    RESULT_LABEL_LOC = "//*[@id='content']//p"
 
     def __init__(self, driver):
         super().__init__(driver)
 
-        self.result_label = Label(self.driver, self.RESULT_LOC,
+        self.result_label = Label(self.driver, self.RESULT_LABEL_LOC,
                                    description="Login page -> Result label")
 
     def get_text_result(self):

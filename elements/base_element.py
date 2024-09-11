@@ -11,26 +11,24 @@ class BaseElement:
         self.loc = loc
         self.description = description
 
-    @property
     def clickable_wait(self):
         return WebDriverWait(self.driver.driver, JsonUtils.get_attribute("timeout"))\
             .until(EC.visibility_of_element_located((By.XPATH, self.loc)))
 
-    @property
     def visibility_wait(self):
         return WebDriverWait(self.driver.driver, JsonUtils.get_attribute("timeout"))\
             .until(EC.visibility_of_element_located((By.XPATH, self.loc)))
 
-    @property
     def presence_wait(self):
         return WebDriverWait(self.driver.driver, JsonUtils.get_attribute("timeout"))\
             .until(EC.visibility_of_element_located((By.XPATH, self.loc)))
 
     def click(self):
-        self.clickable_wait.click()
+        self.clickable_wait().click()
 
     def get_text(self):
-        return self.presence_wait.text
+        self.driver.switch_active_window()
+        return self.presence_wait().text
 
     def get_attribute(self, arg):
         return self.driver.driver.find_element(By.XPATH, self.loc).\
@@ -50,6 +48,11 @@ class BaseElement:
         temp = self.driver.driver.find_element(By.XPATH, self.loc)
         action = ActionChains(self.driver.driver)
         action.click_and_hold(temp).move_by_offset(value, 0).release().perform()
+
+    def move_to_element(self):
+        temp = self.driver.driver.find_element(By.XPATH, self.loc)
+        action = ActionChains(self.driver.driver)
+        action.move_to_element(temp).perform()
 
 
 

@@ -6,7 +6,7 @@ def test_alerts(driver):
     driver.get(JsonUtils.get_attribute("url_alerts_2_3"))
     alerts_page = AlertsPage(driver)
 
-    assert alerts_page.is_page_opened, "Page not opened"
+    alerts_page.wait_for_open()
 
     alerts_page.click_for_js_alert()
     text_alert_1 = driver.get_text()

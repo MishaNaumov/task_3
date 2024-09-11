@@ -6,17 +6,22 @@ import selenium.common
 
 class AlertsContextPage(BasePage):
     UNIQUE_LOC = "//*[@id='content']//h3"
-    TITLE_LOC = "//*[@id='content']//h3"
-    FIELD_LOC = "//*[@id='hot-spot']"
+
+    TITLE_LABEL_LOC = "//*[@id='content']//h3"
+    FIELD_WEB_ELEMENT_LOC = "//*[@id='hot-spot']"
 
     def __init__(self, driver):
         super().__init__(driver)
 
+        self.unique_element = Label(
+            self.driver, self.UNIQUE_LOC,
+            description="Alert + Context page -> Alert + Context page title")
+
         self.field_web_element = WebElement(
-            self.driver, self.FIELD_LOC,
+            self.driver, self.FIELD_WEB_ELEMENT_LOC,
             description="Alert + Context page -> "
                         "Alert + Context page web element")
-        self.title_label = Label(self.driver, self.TITLE_LOC,
+        self.title_label = Label(self.driver, self.TITLE_LABEL_LOC,
             description="Alert + Context page -> "
                         "Alert + Context page title")
 

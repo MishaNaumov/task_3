@@ -1,5 +1,3 @@
-import time
-
 from utils.json_utils import JsonUtils
 from pages.basic_auth_page import BasicAuthPage
 

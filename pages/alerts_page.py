@@ -9,13 +9,13 @@ class AlertsPage(BasePage):
     ALERT_BUTTON_LOC = "//button[@onclick='jsAlert()']"
     CONFIRM_BUTTON_LOC = "//button[@onclick='jsConfirm()']"
     PROMPT_BUTTON_LOC = "//button[@onclick='jsPrompt()']"
-    RESULT_LOC = "//*[@id='result']"
+    RESULT_LABEL_LOC = "//*[@id='result']"
 
     def __init__(self, driver):
         super().__init__(driver)
 
-        # self.unique_element = Button(self.driver, self.UNIQUE_LOC,
-        #                            description="Alert page -> Alert button")
+        self.unique_element = Button(self.driver, self.UNIQUE_LOC,
+                                   description="Alert page -> Alert button")
 
         self.alert_button = Button(self.driver, self.ALERT_BUTTON_LOC,
                                    description="Alert page -> Alert button")
@@ -24,7 +24,7 @@ class AlertsPage(BasePage):
         self.prompt_button = Button(self.driver, self.PROMPT_BUTTON_LOC,
                                    description="Alert page -> Prompt button")
 
-        self.result_label = Label(self.driver, self.RESULT_LOC,
+        self.result_label = Label(self.driver, self.RESULT_LABEL_LOC,
                                    description="Alert page -> Result label")
 
     def click_for_js_alert(self):
@@ -38,6 +38,9 @@ class AlertsPage(BasePage):
 
     def get_text_result(self):
         return self.result_label.get_text()
+
+
+
 
 
 
