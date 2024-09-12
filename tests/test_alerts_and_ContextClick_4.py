@@ -1,5 +1,3 @@
-import time
-
 from pages.alerts_and_context_click_page import AlertsContextPage
 from utils.json_utils import JsonUtils
 
@@ -7,7 +5,6 @@ from utils.json_utils import JsonUtils
 def test_alerts_and_context_click(driver):
     driver.get(JsonUtils.get_attribute("url_alerts_ContexClick_4"))
     alerts_context_page = AlertsContextPage(driver)
-
     alerts_context_page.wait_for_open()
 
     alerts_context_page.click_field()
@@ -18,4 +15,4 @@ def test_alerts_and_context_click(driver):
 
     driver.confirm()
 
-    assert alerts_context_page.is_alert_closed()
+    assert alerts_context_page.is_alert_closed(), "alert not close"

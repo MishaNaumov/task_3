@@ -23,6 +23,12 @@ class Browser:
     def get_url(self):
         return self.driver.current_url
 
+    def refresh(self):
+        self.driver.refresh()
+
+    def scroll_down(self):
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+
     def switch_active_window(self):
         self.driver.switch_to.window(self.driver.window_handles[-1])
 

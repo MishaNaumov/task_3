@@ -5,7 +5,6 @@ from pages.alerts_page import AlertsPage
 def test_alerts(driver):
     driver.get(JsonUtils.get_attribute("url_alerts_2_3"))
     alerts_page = AlertsPage(driver)
-
     alerts_page.wait_for_open()
 
     alerts_page.click_for_js_alert()
