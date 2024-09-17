@@ -26,16 +26,28 @@ class Browser:
     def refresh(self):
         self.driver.refresh()
 
-    def scroll_down(self):
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+    def get_layout(self):
+        return self.driver.page_source
+
+    def click_js(self, element):
+        self.driver.execute_script("arguments[0].click();", element)
+
+    def scroll_down(self, element):
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
     def switch_active_window(self):
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+
+    def switch_first_window(self):
+        self.driver.switch_to.window(self.driver.window_handles[-2])
+
+    def switch_second_window(self):
         self.driver.switch_to.window(self.driver.window_handles[-1])
 
     def switch_back_window(self):
         self.driver.switch_to.window(self.driver.window_handles[0])
 
-    def get_title_widow(self):
+    def get_title_window(self):
         self.switch_active_window()
         return self.driver.title
 

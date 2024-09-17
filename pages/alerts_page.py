@@ -27,21 +27,23 @@ class AlertsPage(BasePage):
         self.result_label = Label(self.driver, self.RESULT_LABEL_LOC,
                                    description="Alert page -> Result label")
 
-    def click_for_js_alert(self):
+    def click_alert(self):
         self.alert_button.click()
 
-    def click_for_js_confirm(self):
+    def click_confirm(self):
         self.confirm_button.click()
 
-    def click_for_js_prompt(self):
+    def click_prompt(self):
         self.prompt_button.click()
+
+    def click_js_alert(self):
+        self.driver.click_js(self.alert_button.presence_wait())
+
+    def click_js_confirm(self):
+        self.driver.click_js(self.confirm_button.presence_wait())
+
+    def click_js_prompt(self):
+        self.driver.click_js(self.prompt_button.presence_wait())
 
     def get_text_result(self):
         return self.result_label.get_text()
-
-
-
-
-
-
-

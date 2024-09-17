@@ -9,5 +9,6 @@ def test_alerts(driver):
     infinity_scroll_page = InfinityScrollPage(driver)
     infinity_scroll_page.wait_for_open()
 
-    driver.scroll_down()
-    time.sleep(6)
+    infinity_scroll_page.scroll()
+    time.sleep(2)
+

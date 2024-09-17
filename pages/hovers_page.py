@@ -52,50 +52,26 @@ class HoversPage(BasePage):
     def move_to_img3(self):
         self.img3_web_element.move_to_element()
 
-    def is_img_1_corrected(self):
-        if self.img1_text_label.presence_wait().is_displayed() and \
-                self.img1_text_label.get_text()[6:] == "user1":
-            return True
-        else:
-            return False
+    def img1_get_text(self):
+        self.img1_text_label.presence_wait().is_displayed()
+        return self.img1_text_label.get_text()[6:]
 
-    def is_img_2_corrected(self):
-        if self.img2_text_label.presence_wait().is_displayed() and \
-                self.img2_text_label.get_text()[6:] == "user2":
-            return True
-        else:
-            return False
+    def img2_get_text(self):
+        self.img2_text_label.presence_wait().is_displayed()
+        return self.img2_text_label.get_text()[6:]
 
-    def is_img_3_corrected(self):
-        if self.img3_text_label.presence_wait().is_displayed() and \
-                self.img3_text_label.get_text()[6:] == "user3":
-            return True
-        else:
-            return False
+    def img3_get_text(self):
+        self.img3_text_label.presence_wait().is_displayed()
+        return self.img3_text_label.get_text()[6:]
 
-    def click_for_img1(self):
+    def click_img1(self):
         self.img1_href_label.click()
 
-    def click_for_img2(self):
+    def click_img2(self):
         self.img2_href_label.click()
 
-    def click_for_img3(self):
+    def click_img3(self):
         self.img3_href_label.click()
 
-    def is_url1_corrected(self):
-        if self.driver.get_url()[-1] == "1":
-            return True
-        else:
-            return False
-
-    def is_url2_corrected(self):
-        if self.driver.get_url()[-1] == "2":
-            return True
-        else:
-            return False
-
-    def is_url3_corrected(self):
-        if self.driver.get_url()[-1] == "3":
-            return True
-        else:
-            return False
+    def get_url(self):
+        return self.driver.get_url()

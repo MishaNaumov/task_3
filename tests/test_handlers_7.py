@@ -9,7 +9,11 @@ def test_alerts(driver):
 
     handlers_page.click_here()
 
-    assert handlers_page.is_new_window(), "New window not opened"
+    window1_text = handlers_page.get_text()
+    window1_title_text = driver.get_title_window()
+
+    assert window1_text == "New Window" == window1_title_text,\
+        "New window not opened"
 
     driver.switch_back_window()
 
@@ -17,16 +21,22 @@ def test_alerts(driver):
 
     handlers_page.click_here()
 
-    assert handlers_page.is_new_window(), "New window not opened"
+    window2_text = handlers_page.get_text()
+    window2_title_text = driver.get_title_window()
+
+    assert window2_text == "New Window" == window2_title_text,\
+        "New window not opened"
 
     driver.switch_back_window()
 
     assert handlers_page.is_page_opened(), "Page not opened"
 
-    handlers_page.close_window_1()
+    driver.switch_first_window()
+    driver.driver.close()
 
-    assert handlers_page.is_page_closed_1(), "Window not closed"
+    assert len(driver.driver.window_handles) == 2, "Window not closed"
 
-    handlers_page.close_window_2()
+    driver.switch_second_window()
+    driver.driver.close()
 
-    assert handlers_page.is_page_closed_2(), "Window not closed"
+    assert len(driver.driver.window_handles) == 1, "Window not closed"

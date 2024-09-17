@@ -22,29 +22,5 @@ class HandlersPage(BasePage):
     def click_here(self):
         self.clicker_label.click()
 
-    def is_new_window(self):
-        if self.text_label.get_text() == "New Window" == \
-                self.driver.get_title_widow():
-            return True
-        else:
-            return False
-
-    def close_window_1(self):
-        self.driver.driver.switch_to.window(self.driver.driver.window_handles[-2])
-        self.driver.driver.close()
-
-    def close_window_2(self):
-        self.driver.driver.switch_to.window(self.driver.driver.window_handles[-1])
-        self.driver.driver.close()
-
-    def is_page_closed_1(self):
-        if len(self.driver.driver.window_handles) == 2:
-            return True
-        else:
-            return False
-
-    def is_page_closed_2(self):
-        if len(self.driver.driver.window_handles) == 1:
-            return True
-        else:
-            return False
+    def get_text(self):
+        return self.text_label.get_text()

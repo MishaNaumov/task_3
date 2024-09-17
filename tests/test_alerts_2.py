@@ -7,7 +7,7 @@ def test_alerts(driver):
     alerts_page = AlertsPage(driver)
     alerts_page.wait_for_open()
 
-    alerts_page.click_for_js_alert()
+    alerts_page.click_alert()
     text_alert_1 = driver.get_text()
 
     assert text_alert_1 == "I am a JS Alert",\
@@ -19,7 +19,7 @@ def test_alerts(driver):
     assert text_result_1 == "You successfully clicked an alert",\
         f"{text_result_1} The text is missing"
 
-    alerts_page.click_for_js_confirm()
+    alerts_page.click_confirm()
     text_alert_2 = driver.get_text()
 
     assert text_alert_2 == "I am a JS Confirm",\
@@ -31,7 +31,7 @@ def test_alerts(driver):
     assert text_result_2 == "You clicked: Ok",\
         f"{text_result_2} The text is missing"
 
-    alerts_page.click_for_js_prompt()
+    alerts_page.click_prompt()
     text_alert_3 = driver.get_text()
 
     assert text_alert_3 == "I am a JS prompt",\
