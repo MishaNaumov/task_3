@@ -23,4 +23,5 @@ class HandlersPage(BasePage):
         self.clicker_label.click()
 
     def get_text(self):
+        self.driver.switch_active_window()
         return self.text_label.get_text()

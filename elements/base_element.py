@@ -13,7 +13,7 @@ class BaseElement:
 
     def clickable_wait(self):
         return WebDriverWait(self.driver.driver, JsonUtils.get_attribute("timeout"))\
-            .until(EC.visibility_of_element_located((By.XPATH, self.loc)))
+            .until(EC.element_to_be_clickable((By.XPATH, self.loc)))
 
     def visibility_wait(self):
         return WebDriverWait(self.driver.driver, JsonUtils.get_attribute("timeout"))\
@@ -21,18 +21,16 @@ class BaseElement:
 
     def presence_wait(self):
         return WebDriverWait(self.driver.driver, JsonUtils.get_attribute("timeout"))\
-            .until(EC.visibility_of_element_located((By.XPATH, self.loc)))
+            .until(EC.presence_of_element_located((By.XPATH, self.loc)))
 
     def click(self):
         self.clickable_wait().click()
 
     def get_text(self):
-        self.driver.switch_active_window()
         return self.presence_wait().text
 
     def get_attribute(self, arg):
-        return self.driver.driver.find_element(By.XPATH, self.loc).\
-            get_attribute(arg)
+        return self.driver.driver.find_element(By.XPATH, self.loc).get_attribute(arg)
 
     def right_click(self):
         temp = self.driver.driver.find_element(By.XPATH, self.loc)
@@ -54,6 +52,7 @@ class BaseElement:
         action = ActionChains(self.driver.driver)
         action.move_to_element(temp).perform()
 
-
-
-
+    def select_text(self):
+        temp = self.driver.driver.find_element(By.XPATH, self.loc)
+        action = ActionChains(self.driver.driver)
+        action.click_and_hold(temp).move_by_offset(850, 0).release().perform()

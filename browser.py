@@ -1,6 +1,6 @@
 from selenium import webdriver
-import random
-import string
+from utils.random_utils import RandomUtils
+
 
 
 class Browser:
@@ -51,6 +51,12 @@ class Browser:
         self.switch_active_window()
         return self.driver.title
 
+    def frame(self, iframe):
+        self.driver.switch_to.frame(iframe)
+
+    def quit_frame(self):
+        self.driver.switch_to.default_content()
+
     def alert(self):
         return self.driver.switch_to.alert
 
@@ -61,10 +67,7 @@ class Browser:
         self.alert().dismiss()
 
     def write_text_and_confirm(self):
-        text = ''.join(
-            [random.choice(string.ascii_lowercase + string.digits
-                           if i != 5 else string.ascii_uppercase)
-             for i in range(10)])
+        text = RandomUtils().random_str(10)
         self.alert().send_keys(text)
         self.confirm()
         return text

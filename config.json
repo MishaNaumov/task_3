@@ -5,10 +5,11 @@
   "url_actions_5": "https://the-internet.herokuapp.com/horizontal_slider",
   "url_hovers_6": "https://the-internet.herokuapp.com/hovers",
   "url_handlers_7": "https://the-internet.herokuapp.com/windows",
-  "url_IFrame_8_9": "https://demoqa.com/frames",
+  "url_IFrame_8_9": "https://ej2.syncfusion.com/demos/rich-text-editor/iframe/",
   "url_dynamic_content_10": "https://the-internet.herokuapp.com/dynamic_content",
   "url_infinity_scroll_11": "https://the-internet.herokuapp.com/infinite_scroll",
   "url_upload_image_12_13_14": "https://the-internet.herokuapp.com/upload",
+  "url_IFrame_image_15": "https://demoqa.com/frames",
   "timeout": 20,
   "options": [
     "--lang=EN",
