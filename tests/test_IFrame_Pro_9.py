@@ -1,5 +1,3 @@
-import time
-
 from utils.json_utils import JsonUtils
 from pages.iframe_page import IframePage
 
@@ -32,9 +30,7 @@ def test_alerts(driver):
 
     assert font_size_text == "8pt", "Text is not 8pt"
 
-    iframe_page.clear_format()
-    iframe_page.clear_field()
-    time.sleep(2)
+    iframe_page.new_file()
     text_iframe = iframe_page.get_text()
 
     assert text_iframe == "", "Iframe not cleared"

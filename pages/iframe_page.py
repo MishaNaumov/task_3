@@ -102,6 +102,10 @@ class IframePage(BasePage):
     def clear_format(self):
         self.field_input.clear_format()
 
+    def new_file(self):
+        self.clear_format()
+        self.clear_field()
+
     def is_clear_format(self):
         try:
             self.text_style_label.get_attribute("style")
