@@ -29,6 +29,9 @@ class BaseElement:
     def get_text(self):
         return self.presence_wait().text
 
+    def is_displayed(self):
+        return self.presence_wait().is_displayed()
+
     def get_attribute(self, arg):
         return self.driver.driver.find_element(By.XPATH, self.loc).get_attribute(arg)
 

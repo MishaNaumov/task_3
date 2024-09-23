@@ -58,7 +58,6 @@ class IframePage(BasePage):
                                       self.TEXT_STYLE2_LABEL_LOC,
                                       description="Iframe page -> Text style label")
 
-
     def switch_iframe1(self):
         self.driver.frame(self.iframe_web_element.presence_wait())
 

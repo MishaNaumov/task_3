@@ -101,6 +101,3 @@ class Iframe2Page(BasePage):
 
     def get_text_page2_iframe2(self):
         return self.page2_iframe1_text_web_element.get_text()
-
-
-

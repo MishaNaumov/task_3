@@ -53,15 +53,15 @@ class HoversPage(BasePage):
         self.img3_web_element.move_to_element()
 
     def img1_get_text(self):
-        self.img1_text_label.presence_wait().is_displayed()
+        self.img1_text_label.is_displayed()
         return self.img1_text_label.get_text()[6:]
 
     def img2_get_text(self):
-        self.img2_text_label.presence_wait().is_displayed()
+        self.img2_text_label.is_displayed()
         return self.img2_text_label.get_text()[6:]
 
     def img3_get_text(self):
-        self.img3_text_label.presence_wait().is_displayed()
+        self.img3_text_label.is_displayed()
         return self.img3_text_label.get_text()[6:]
 
     def click_img1(self):

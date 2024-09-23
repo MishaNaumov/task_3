@@ -1,6 +1,7 @@
 from pages.base_page import BasePage
 from elements.input import Input
 from elements.label import Label
+from elements.button import Button
 import selenium.common
 import os
 
@@ -12,6 +13,12 @@ class UploadImgPage(BasePage):
     SUBMIT_INPUT_LOC = "//*[@id='file-submit']"
     TITLE_LABEL_LOC = "//*[@id='content']//h3"
     FILENAME_LABEL_LOC = "//*[@id='uploaded-files']"
+
+    DROP_UPLOAD_INPUT_LOC = "//*[@id='drag-drop-upload']"
+
+    FILENAME_WINDOW_LABEL_LOC = "//*[@id='drag-drop-upload']//div[@class='dz-filename']//span"
+    CHECK_MARK_LABEL_LOC = "//*[@id='drag-drop-upload']//div[@class='dz-success-mark']//span"
+
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -27,6 +34,14 @@ class UploadImgPage(BasePage):
                                   description="Upload img page -> Title label")
         self.filename_label = Label(self.driver, self.FILENAME_LABEL_LOC,
                                  description="Upload img page -> File name label")
+
+        self.drop_upload_button = Button(self.driver, self.DROP_UPLOAD_INPUT_LOC,
+                                    description="Upload img page -> Drop upload button")
+
+        self.filename_window_label = Label(self.driver, self.FILENAME_WINDOW_LABEL_LOC,
+                                       description="Upload img page -> File name label")
+        self.check_mark_label = Label(self.driver, self.CHECK_MARK_LABEL_LOC,
+                                       description="Upload img page -> Check mark label")
 
     def upload_file(self, file):
         self.upload_input.send_keys(f"{os.getcwd()}/{file}")
@@ -46,3 +61,21 @@ class UploadImgPage(BasePage):
 
     def get_file_name(self):
         return self.filename_label.get_text()
+
+    def click_upload_file(self):
+        self.drop_upload_button.click()
+
+    def is_opened_dialog_window(self):
+        try:
+            self.driver.click_js(self.drop_upload_button.click())
+            return False
+        except selenium.common.JavascriptException:
+            return True
+
+    def get_file_name_2(self):
+        return self.filename_window_label.get_text()
+
+    def check_mark_is_displayed(self):
+        return self.check_mark_label.is_displayed()
+
+
