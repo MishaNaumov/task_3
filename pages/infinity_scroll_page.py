@@ -28,25 +28,13 @@ class InfinityScrollPage(BasePage):
                                      description="Infinite Scroll page"
                                                  " -> Paragraph label")
 
-    def test_12(self):
-        response = self.driver.get_layout()
-        soup = BeautifulSoup(response, "lxml")
-
-        return soup
-
-    def scroll_new(self):
-        src = self.driver.get_layout()
-        soup = BeautifulSoup(src, "lxml")
-        next_label = soup.find(class_="jscroll-added").find_next_sibling()
-        return next_label
-
     def scroll(self):
-        d = []
         while True:
             self.driver.scroll_down(self.paragraph_label.presence_wait())
             src = self.driver.get_layout()
-            soup = BeautifulSoup(src, "lxml")
-            d.append(soup.find(class_="jscroll-added").find_next_sibling())
-            if len(d) == 24:
+            soup = BeautifulSoup(src, "html.parser")
+            if len(soup.find_all(class_="jscroll-added")) == 23:
                 break
+        return len(soup.find_all(class_="jscroll-added"))
+
 
