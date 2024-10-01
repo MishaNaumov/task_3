@@ -1,7 +1,7 @@
-from utils.json_utils import JsonUtils
+from utils.config_utils import JsonUtils
 from pages.upload_img_page import UploadImgPage
 
-FILE = "test.txt"
+FILE = "photo.png"
 
 
 def test_alerts(driver):

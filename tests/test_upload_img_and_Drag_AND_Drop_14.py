@@ -1,9 +1,9 @@
-from utils.json_utils import JsonUtils
+from utils.config_utils import JsonUtils
 from pages.upload_img_page import UploadImgPage
 from utils.dialog_window import DialogWindow
 
 
-FILE = "test.txt"
+FILE = "photo.png"
 FILE_PATH = r"C:\Users\79119\task_3"
 
 

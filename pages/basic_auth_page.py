@@ -8,8 +8,10 @@ class BasicAuthPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        self.result_label = Label(self.driver, self.RESULT_LABEL_LOC,
-                                   description="Login page -> Result label")
+        self.result_label = Label(
+            self.driver, self.RESULT_LABEL_LOC,
+            description="Login page -> Result label"
+        )
 
     def get_text_result(self):
         return self.result_label.get_text()

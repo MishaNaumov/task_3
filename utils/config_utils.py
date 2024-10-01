@@ -1,7 +1,7 @@
 import json
 
 
-class JsonUtils:
+class ConfigUtils:
     with open("config.json") as file:
         data = json.load(file)
 

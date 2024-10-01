@@ -23,40 +23,65 @@ class IframePage(BasePage):
     PT8_BUTTON_LOC = "//ul[@role='menu']//li[2]"
     TEXT_STYLE2_LABEL_LOC = "//body//p//span"
 
-
     def __init__(self, driver):
         super().__init__(driver)
 
-        self.unique_element = Label(self.driver, self.UNIQUE_LOC,
-                                   description="Iframe page -> Iframe label")
+        self.unique_element = Label(
+            self.driver,
+            self.UNIQUE_LOC,
+            description="Iframe page -> Iframe label"
+        )
 
-        self.iframe_web_element = WebElement(self.driver, self.IFRAME_WEB_ELEMENT_LOC,
-                                    description="Iframe page -> Iframe web element")
-        self.field_input = Input(self.driver, self.FIELD_INPUT_LOC,
-                                    description="Iframe page -> Field web element")
+        self.iframe_web_element = WebElement(
+            self.driver,
+            self.IFRAME_WEB_ELEMENT_LOC,
+            description="Iframe page -> Iframe web element"
+        )
+        self.field_input = Input(
+            self.driver,
+            self.FIELD_INPUT_LOC,
+            description="Iframe page -> Field web element"
+        )
 
-        self.text_label = Label(self.driver, self.TEXT_LABEL_LOC,
-                                 description="Iframe page -> Text label")
+        self.text_label = Label(
+            self.driver,
+            self.TEXT_LABEL_LOC,
+            description="Iframe page -> Text label"
+        )
 
-        self.align_button = Button(self.driver, self.ALIGN_BUTTON_LOC,
-                                description="Iframe page -> Align button")
-        self.align_right_button = Button(self.driver, self.ALIGN_RIGHT_BUTTON_LOC,
-                                   description="Iframe page -> Align right button")
+        self.align_button = Button(
+            self.driver,
+            self.ALIGN_BUTTON_LOC,
+            description="Iframe page -> Align button"
+        )
+        self.align_right_button = Button(
+            self.driver,
+            self.ALIGN_RIGHT_BUTTON_LOC,
+            description="Iframe page -> Align right button"
+        )
 
-        self.text_style_label = Label(self.driver,
-                                         self.TEXT_STYLE_LABEL_LOC,
-                                         description="Iframe page -> Text style label")
+        self.text_style_label = Label(
+            self.driver,
+            self.TEXT_STYLE_LABEL_LOC,
+            description="Iframe page -> Text style label"
+        )
 
-        self.front_size_button = Button(self.driver,
-                                       self.FRONT_SIZE_BUTTON_LOC,
-                                       description="Iframe page -> Text style label")
-        self.pt8_button = Button(self.driver,
-                                       self.PT8_BUTTON_LOC,
-                                       description="Iframe page -> Text style label")
+        self.front_size_button = Button(
+            self.driver,
+            self.FRONT_SIZE_BUTTON_LOC,
+            description="Iframe page -> Text style label"
+        )
+        self.pt8_button = Button(
+            self.driver,
+            self.PT8_BUTTON_LOC,
+            description="Iframe page -> Text style label"
+        )
 
-        self.text_style2_label = Label(self.driver,
-                                      self.TEXT_STYLE2_LABEL_LOC,
-                                      description="Iframe page -> Text style label")
+        self.text_style2_label = Label(
+            self.driver,
+            self.TEXT_STYLE2_LABEL_LOC,
+            description="Iframe page -> Text style label"
+        )
 
     def switch_iframe1(self):
         self.driver.frame(self.iframe_web_element.presence_wait())
@@ -89,7 +114,7 @@ class IframePage(BasePage):
         return self.text_style_label.get_attribute("style")[-6:-1]
 
     def select_half_text(self):
-        self.field_input.select_text()
+        self.field_input.select_half_text()
 
     def turn_text_8pt(self):
         self.front_size_button.click()

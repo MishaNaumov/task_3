@@ -1,6 +1,5 @@
-from utils.json_utils import JsonUtils
+from utils.config_utils import JsonUtils
 from pages.basic_auth_page import BasicAuthPage
-
 
 USERNAME = "admin"
 PASSWORD = "admin"
@@ -11,6 +10,6 @@ def test_basic_auth(driver):
                .format(USERNAME, PASSWORD))
     authorization_page = BasicAuthPage(driver)
 
-    assert authorization_page.get_text_result() == \
-           "Congratulations! You must have the proper credentials.", \
+    assert authorization_page.get_text_result() ==\
+           "Congratulations! You must have the proper credentials.",\
         "Basic Authorization page not opened"

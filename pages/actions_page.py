@@ -13,20 +13,27 @@ class ActionsPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        self.unique_element = Input(self.driver, self.UNIQUE_LOC,
-                                    description="Actions page -> Actions input")
+        self.unique_element = Input(
+            self.driver,
+            self.UNIQUE_LOC,
+            description="Actions page -> Actions input"
+        )
 
-        self.actions_input = Input(self.driver, self.ACTIONS_INPUT_LOC,
-                                   description="Actions page -> Actions input")
-        self.value_label = Label(self.driver, self.VALUE_LABEL_LOC,
-                                   description="Actions page -> Value label")
+        self.actions_input = Input(
+            self.driver,
+            self.ACTIONS_INPUT_LOC,
+            description="Actions page -> Actions input")
+        self.value_label = Label(
+            self.driver,
+            self.VALUE_LABEL_LOC,
+            description="Actions page -> Value label")
 
     def random_value(self):
         minimum = float(self.actions_input.get_attribute("min"))
         maximum = float(self.actions_input.get_attribute("max"))
         center = maximum / 2
 
-        list_value = [i/2 for i in range(int(minimum) + 1, int(maximum) * 2)]
+        list_value = [i / 2 for i in range(int(minimum) + 1, int(maximum) * 2)]
         random_value = random.choice(list_value)
 
         if random_value > center:
@@ -47,4 +54,3 @@ class ActionsPage(BasePage):
 
     def check_value(self):
         return self.value_label.get_text()
-

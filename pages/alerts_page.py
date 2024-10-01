@@ -14,18 +14,32 @@ class AlertsPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        self.unique_element = Button(self.driver, self.UNIQUE_LOC,
-                                   description="Alert page -> Alert button")
+        self.unique_element = Button(
+            self.driver,
+            self.UNIQUE_LOC,
+            description="Alert page -> Alert button"
+        )
 
-        self.alert_button = Button(self.driver, self.ALERT_BUTTON_LOC,
-                                   description="Alert page -> Alert button")
-        self.confirm_button = Button(self.driver, self.CONFIRM_BUTTON_LOC,
-                                   description="Alert page -> Confirm button")
-        self.prompt_button = Button(self.driver, self.PROMPT_BUTTON_LOC,
-                                   description="Alert page -> Prompt button")
-
-        self.result_label = Label(self.driver, self.RESULT_LABEL_LOC,
-                                   description="Alert page -> Result label")
+        self.alert_button = Button(
+            self.driver,
+            self.ALERT_BUTTON_LOC,
+            description="Alert page -> Alert button"
+        )
+        self.confirm_button = Button(
+            self.driver,
+            self.CONFIRM_BUTTON_LOC,
+            description="Alert page -> Confirm button"
+        )
+        self.prompt_button = Button(
+            self.driver,
+            self.PROMPT_BUTTON_LOC,
+            description="Alert page -> Prompt button"
+        )
+        self.result_label = Label(
+            self.driver,
+            self.RESULT_LABEL_LOC,
+            description="Alert page -> Result label"
+        )
 
     def click_alert(self):
         self.alert_button.click()

@@ -1,4 +1,4 @@
-from utils.json_utils import JsonUtils
+from utils.config_utils import JsonUtils
 from pages.handlers_page import HandlersPage
 
 

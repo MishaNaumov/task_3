@@ -1,4 +1,4 @@
-from utils.json_utils import JsonUtils
+from utils.config_utils import JsonUtils
 from pages.infinity_scroll_page import InfinityScrollPage
 
 AGE = 23

@@ -14,16 +14,22 @@ class AlertsContextPage(BasePage):
         super().__init__(driver)
 
         self.unique_element = Label(
-            self.driver, self.UNIQUE_LOC,
-            description="Alert + Context page -> Alert + Context page title")
+            self.driver,
+            self.UNIQUE_LOC,
+            description="Alert + Context page -> Alert + Context page title"
+        )
 
         self.field_web_element = WebElement(
-            self.driver, self.FIELD_WEB_ELEMENT_LOC,
+            self.driver,
+            self.FIELD_WEB_ELEMENT_LOC,
             description="Alert + Context page -> "
-                        "Alert + Context page web element")
-        self.title_label = Label(self.driver, self.TITLE_LABEL_LOC,
-            description="Alert + Context page -> "
-                        "Alert + Context page title")
+                        "Alert + Context page web element"
+        )
+        self.title_label = Label(
+            self.driver,
+            self.TITLE_LABEL_LOC,
+            description="Alert + Context page -> Alert + Context page title"
+        )
 
     def click_field(self):
         self.field_web_element.right_click()
@@ -34,4 +40,3 @@ class AlertsContextPage(BasePage):
             return True
         except selenium.common.TimeoutException:
             return False
-

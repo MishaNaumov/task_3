@@ -11,13 +11,22 @@ class HandlersPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-        self.unique_element = Label(self.driver, self.UNIQUE_LOC,
-                                   description="Handlers page -> Clicker label")
+        self.unique_element = Label(
+            self.driver,
+            self.UNIQUE_LOC,
+            description="Handlers page -> Clicker label"
+        )
 
-        self.clicker_label = Label(self.driver, self.CLICKER_LABEL_LOC,
-                                   description="Handlers page -> Clicker label")
-        self.text_label = Label(self.driver, self.TEXT_LABEL,
-                                   description="Handlers page -> New window")
+        self.clicker_label = Label(
+            self.driver,
+            self.CLICKER_LABEL_LOC,
+            description="Handlers page -> Clicker label"
+        )
+        self.text_label = Label(
+            self.driver,
+            self.TEXT_LABEL,
+            description="Handlers page -> New window"
+        )
 
     def click_here(self):
         self.clicker_label.click()

@@ -16,32 +16,57 @@ class UploadImgPage(BasePage):
 
     DROP_UPLOAD_INPUT_LOC = "//*[@id='drag-drop-upload']"
 
-    FILENAME_WINDOW_LABEL_LOC = "//*[@id='drag-drop-upload']//div[@class='dz-filename']//span"
-    CHECK_MARK_LABEL_LOC = "//*[@id='drag-drop-upload']//div[@class='dz-success-mark']//span"
-
+    FILENAME_WINDOW_LABEL_LOC = "//*[@id='drag-drop-upload']" \
+                                "//div[@class='dz-filename']//span"
+    CHECK_MARK_LABEL_LOC = "//*[@id='drag-drop-upload']" \
+                           "//div[@class='dz-success-mark']//span"
 
     def __init__(self, driver):
         super().__init__(driver)
 
-        self.unique_element = Input(self.driver, self.UNIQUE_LOC,
-                                   description="Upload img page -> Upload input")
+        self.unique_element = Input(
+            self.driver,
+            self.UNIQUE_LOC,
+            description="Upload img page -> Upload input"
+        )
 
-        self.upload_input = Input(self.driver, self.UPLOAD_INPUT_LOC,
-                                     description="Upload img page -> Upload input")
-        self.submit_input = Input(self.driver, self.SUBMIT_INPUT_LOC,
-                                  description="Upload img page -> Submit input")
-        self.title_label = Label(self.driver, self.TITLE_LABEL_LOC,
-                                  description="Upload img page -> Title label")
-        self.filename_label = Label(self.driver, self.FILENAME_LABEL_LOC,
-                                 description="Upload img page -> File name label")
+        self.upload_input = Input(
+            self.driver,
+            self.UPLOAD_INPUT_LOC,
+            description="Upload img page -> Upload input"
+        )
+        self.submit_input = Input(
+            self.driver,
+            self.SUBMIT_INPUT_LOC,
+            description="Upload img page -> Submit input"
+        )
+        self.title_label = Label(
+            self.driver,
+            self.TITLE_LABEL_LOC,
+            description="Upload img page -> Title label"
+        )
+        self.filename_label = Label(
+            self.driver,
+            self.FILENAME_LABEL_LOC,
+            description="Upload img page -> File name label"
+        )
 
-        self.drop_upload_button = Button(self.driver, self.DROP_UPLOAD_INPUT_LOC,
-                                    description="Upload img page -> Drop upload button")
+        self.drop_upload_button = Button(
+            self.driver,
+            self.DROP_UPLOAD_INPUT_LOC,
+            description="Upload img page -> Drop upload button"
+        )
 
-        self.filename_window_label = Label(self.driver, self.FILENAME_WINDOW_LABEL_LOC,
-                                       description="Upload img page -> File name label")
-        self.check_mark_label = Label(self.driver, self.CHECK_MARK_LABEL_LOC,
-                                       description="Upload img page -> Check mark label")
+        self.filename_window_label = Label(
+            self.driver,
+            self.FILENAME_WINDOW_LABEL_LOC,
+            description="Upload img page -> File name label"
+        )
+        self.check_mark_label = Label(
+            self.driver,
+            self.CHECK_MARK_LABEL_LOC,
+            description="Upload img page -> Check mark label"
+        )
 
     def upload_file(self, file):
         self.upload_input.send_keys(f"{os.getcwd()}/{file}")
@@ -77,5 +102,3 @@ class UploadImgPage(BasePage):
 
     def check_mark_is_displayed(self):
         return self.check_mark_label.is_displayed()
-
-

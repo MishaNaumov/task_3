@@ -1,5 +1,5 @@
 from pages.alerts_and_context_click_page import AlertsContextPage
-from utils.json_utils import JsonUtils
+from utils.config_utils import JsonUtils
 
 
 def test_alerts_and_context_click(driver):
