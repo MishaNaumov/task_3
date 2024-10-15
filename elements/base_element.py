@@ -1,7 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
-from utils.config_utils import JsonUtils
+from utils.config_utils import ConfigUtils
 from selenium.webdriver.common.by import By
 from logging_test.logger import Logger
 
@@ -12,68 +12,79 @@ class BaseElement:
         self.loc = loc
         self.description = description
 
-    def clickable_wait(self):
+        if isinstance(loc, str):
+            if "/" in loc:
+                self.loc = (By.XPATH, loc)
+            else:
+                self.loc = (By.ID, loc)
+        else:
+            self.loc = loc
+
+    def wait_clickable(self):
         return WebDriverWait(
-            self.driver.driver, JsonUtils.get_attribute("timeout")).until(
-            EC.element_to_be_clickable((By.XPATH, self.loc))
+            self.driver.driver, ConfigUtils.get_attribute("timeout")).until(
+            EC.element_to_be_clickable(self.loc)
         )
 
-    def visibility_wait(self):
+    def wait_visibility(self):
         return WebDriverWait(
-            self.driver.driver, JsonUtils.get_attribute("timeout")).until(
-            EC.visibility_of_element_located((By.XPATH, self.loc))
+            self.driver.driver, ConfigUtils.get_attribute("timeout")).until(
+            EC.visibility_of_element_located(self.loc)
         )
 
-    def presence_wait(self):
+    def wait_presence(self):
         return WebDriverWait(
-            self.driver.driver, JsonUtils.get_attribute("timeout")).until(
-            EC.presence_of_element_located((By.XPATH, self.loc))
+            self.driver.driver, ConfigUtils.get_attribute("timeout")).until(
+            EC.presence_of_element_located(self.loc)
         )
 
     def click(self):
         Logger().info(f"{self.description}: click")
-        self.clickable_wait().click()
+        self.wait_clickable().click()
+
+    def click_js(self):
+        Logger().info("click js")
+        self.driver.driver.execute_script("arguments[0].click();",
+                                          self.wait_presence())
+
+    def scroll_down(self):
+        Logger().info("scroll down")
+        self.driver.driver.execute_script("arguments[0].scrollIntoView();",
+                                          self.wait_presence())
 
     def get_text(self):
-        Logger().info(f"{self.description}: getting text")
-        return self.presence_wait().text
+        Logger().info(f"{self.description}: get text")
+        return self.wait_presence().text
 
     def is_displayed(self):
         Logger().info(f"{self.description}: visible on the display")
-        return self.presence_wait().is_displayed()
+        return self.wait_presence().is_displayed()
 
     def get_attribute(self, arg):
-        Logger().info(f"{self.description}: getting attributes")
-        return self.driver.driver.find_element(By.XPATH,
-                                               self.loc).get_attribute(arg)
+        Logger().info(f"{self.description}: get attribute")
+        return self.wait_presence().get_attribute(arg)
 
     def right_click(self):
-        temp = self.driver.driver.find_element(By.XPATH, self.loc)
-        action = ActionChains(self.driver.driver)
         Logger().info(f"{self.description}: right click")
-        action.context_click(temp).perform()
+        ActionChains(self.driver.driver).context_click(
+            self.wait_presence()).perform()
 
     def double_click(self):
-        temp = self.driver.driver.find_element(By.XPATH, self.loc)
-        action = ActionChains(self.driver.driver)
         Logger().info(f"{self.description}: double click")
-        action.double_click(temp).perform()
+        ActionChains(self.driver.driver).double_click(
+            self.wait_presence()).perform()
 
-    def click_and_hole(self, value):
-        temp = self.driver.driver.find_element(By.XPATH, self.loc)
-        action = ActionChains(self.driver.driver)
-        Logger().info(f"{self.description}: click and hole")
-        action.click_and_hold(temp).\
-            move_by_offset(value, 0).release().perform()
+    def click_and_hold(self, value):
+        Logger().info(f"{self.description}: click and hold")
+        ActionChains(self.driver.driver).click_and_hold(
+            self.wait_presence()).move_by_offset(value, 0).release().perform()
 
     def move_to_element(self):
-        temp = self.driver.driver.find_element(By.XPATH, self.loc)
-        action = ActionChains(self.driver.driver)
         Logger().info(f"{self.description}: move to element")
-        action.move_to_element(temp).perform()
+        ActionChains(self.driver.driver).move_to_element(
+            self.wait_presence()).perform()
 
     def select_half_text(self):
-        temp = self.driver.driver.find_element(By.XPATH, self.loc)
-        action = ActionChains(self.driver.driver)
         Logger().info(f"{self.description}: select half text")
-        action.click_and_hold(temp).move_by_offset(850, 0).release().perform()
+        ActionChains(self.driver.driver).click_and_hold(
+            self.wait_presence()).move_by_offset(850, 0).release().perform()

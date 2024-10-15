@@ -1,9 +1,8 @@
 from pages.base_page import BasePage
 from elements.label import Label
 from elements.webelement import WebElement
-from elements.input import Input
+from elements.custom_input import CustomInput
 from elements.button import Button
-from utils.random_utils import RandomUtils
 import selenium.common
 
 
@@ -14,12 +13,12 @@ class IframePage(BasePage):
     FIELD_INPUT_LOC = "//body"
     TEXT_LABEL_LOC = "//strong[1]"
 
-    ALIGN_BUTTON_LOC = "//button[@id='iframeRTE_toolbar_Alignments']"
+    ALIGN_BUTTON_LOC = "iframeRTE_toolbar_Alignments"
 
     ALIGN_RIGHT_BUTTON_LOC = "//ul[@role='menu']//li[3]"
     TEXT_STYLE_LABEL_LOC = "//body//p"
 
-    FRONT_SIZE_BUTTON_LOC = "//button[@id='iframeRTE_toolbar_FontSize']"
+    FRONT_SIZE_BUTTON_LOC = "iframeRTE_toolbar_FontSize"
     PT8_BUTTON_LOC = "//ul[@role='menu']//li[2]"
     TEXT_STYLE2_LABEL_LOC = "//body//p//span"
 
@@ -37,7 +36,7 @@ class IframePage(BasePage):
             self.IFRAME_WEB_ELEMENT_LOC,
             description="Iframe page -> Iframe web element"
         )
-        self.field_input = Input(
+        self.field_input = CustomInput(
             self.driver,
             self.FIELD_INPUT_LOC,
             description="Iframe page -> Field web element"
@@ -84,15 +83,13 @@ class IframePage(BasePage):
         )
 
     def switch_iframe1(self):
-        self.driver.frame(self.iframe_web_element.presence_wait())
+        self.driver.switch_frame(self.iframe_web_element.wait_presence())
 
-    def clear_field(self):
+    def clear_field_iframe(self):
         self.field_input.clear()
 
-    def send_keys_random(self):
-        text = RandomUtils().random_str(20)
+    def send_keys_random(self, text):
         self.field_input.send_keys(text)
-        return text
 
     def get_text(self):
         return self.field_input.get_text()
@@ -104,14 +101,18 @@ class IframePage(BasePage):
         self.field_input.select_all_text_bold()
 
     def is_text_bold(self):
-        return self.text_label.presence_wait()
+        try:
+            self.text_label.wait_presence()
+            return True
+        except selenium.common.TimeoutException:
+            return False
 
     def align_text_right(self):
         self.align_button.click()
         self.align_right_button.click()
 
     def get_style_text(self):
-        return self.text_style_label.get_attribute("style")[-6:-1]
+        return self.text_style_label.get_attribute("style")
 
     def select_half_text(self):
         self.field_input.select_half_text()
@@ -121,18 +122,18 @@ class IframePage(BasePage):
         self.pt8_button.click()
 
     def get_font_size_text(self):
-        return self.text_style2_label.get_attribute("style")[-4:-1]
+        return self.text_style2_label.get_attribute("style")
 
     def clear_format(self):
         self.field_input.clear_format()
 
-    def new_file(self):
+    def create_new_file(self):
         self.clear_format()
-        self.clear_field()
+        self.clear_field_iframe()
 
     def is_clear_format(self):
         try:
-            self.text_style_label.get_attribute("style")
+            self.text_style_label.is_displayed()
             return False
-        except selenium.common.NoSuchElementException:
+        except selenium.common.TimeoutException:
             return True

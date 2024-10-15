@@ -1,6 +1,8 @@
-from utils.random_utils import RandomUtils
 from logging_test.logger import Logger
 from browser_factory import BrowserFactory
+from selenium.webdriver.support.wait import WebDriverWait
+from utils.config_utils import ConfigUtils
+from selenium.common.exceptions import NoAlertPresentException
 
 
 class Browser:
@@ -10,7 +12,7 @@ class Browser:
 
     def get(self, url):
         Logger().info("login browser")
-        return self.driver.get(url)
+        self.driver.get(url)
 
     def quit(self):
         Logger().info("quit browser")
@@ -20,12 +22,12 @@ class Browser:
         Logger().info("close")
         self.driver.close()
 
-    def back_page(self):
-        Logger().info("return to previous page")
+    def back(self):
+        Logger().info("back")
         self.driver.back()
 
     def get_url(self):
-        Logger().info("getting url")
+        Logger().info("get url")
         return self.driver.current_url
 
     def refresh(self):
@@ -33,65 +35,61 @@ class Browser:
         self.driver.refresh()
 
     def get_page_source(self):
-        Logger().info("getting page source")
+        Logger().info("get page source")
         return self.driver.page_source
 
-    def click_js(self, element):
-        Logger().info("click js")
-        self.driver.execute_script("arguments[0].click();", element)
-
-    def scroll_down(self, element):
-        Logger().info("scroll down")
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
-
-    def switch_active_window(self):
+    def switch_last_window(self):
         Logger().info("switch last window")
         self.driver.switch_to.window(self.driver.window_handles[-1])
 
-    def switch_first_window(self):
-        Logger().info("switch first window")
+    def switch_penultimate_window(self):
+        Logger().info("switch penultimate window")
         self.driver.switch_to.window(self.driver.window_handles[-2])
 
-    def switch_second_window(self):
-        Logger().info("switch second window")
-        self.driver.switch_to.window(self.driver.window_handles[-1])
-
-    def switch_back_window(self):
-        Logger().info("switch back window")
+    def switch_first_window(self):
+        Logger().info("switch first window")
         self.driver.switch_to.window(self.driver.window_handles[0])
 
     def get_title_window(self):
-        self.switch_active_window()
-        Logger().info("getting title window")
+        self.switch_last_window()
+        Logger().info("get title window")
         return self.driver.title
 
-    def frame(self, iframe):
-        Logger().info("switch iframe")
-        self.driver.switch_to.frame(iframe)
+    def switch_frame(self, frame):
+        Logger().info("switch frame")
+        self.driver.switch_to.frame(frame)
 
-    def quit_frame(self):
-        Logger().info("quit iframe")
+    def switch_to_default_content(self):
+        Logger().info("switch to default content")
         self.driver.switch_to.default_content()
 
-    def alert(self):
+    def switch_alert(self):
         Logger().info("switch alert")
-        return self.driver.switch_to.alert
+        wait = WebDriverWait(self.driver, ConfigUtils.get_attribute("timeout"))
+        alert = wait.until(lambda d: d.switch_to.alert)
+        return alert
+
+    def is_alert_closed(self):
+        try:
+            self.switch_alert()
+            return False
+        except NoAlertPresentException:
+            return True
 
     def get_text(self):
-        Logger().info("driver getting text")
-        return self.alert().text
+        Logger().info("driver get text")
+        return self.switch_alert().text
 
     def cancel(self):
         Logger().info("cancel")
-        self.alert().dismiss()
+        self.switch_alert().dismiss()
 
-    def write_text_and_confirm(self):
-        text = RandomUtils().random_str(10)
-        self.alert().send_keys(text)
+    def write_text_and_confirm(self, text):
+        self.switch_alert().send_keys(text)
         self.confirm()
-        Logger().info("writing text and confirm")
+        Logger().info("write text and confirm")
         return text
 
     def confirm(self):
         Logger().info("confirm")
-        self.alert().accept()
+        self.switch_alert().accept()

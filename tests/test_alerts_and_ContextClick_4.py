@@ -1,13 +1,13 @@
 from pages.alerts_and_context_click_page import AlertsContextPage
-from utils.config_utils import JsonUtils
+from utils.config_utils import ConfigUtils
 
 
 def test_alerts_and_context_click(driver):
-    driver.get(JsonUtils.get_attribute("url_alerts_ContexClick_4"))
+    driver.get(ConfigUtils.get_attribute("url_alerts_ContexClick_4"))
     alerts_context_page = AlertsContextPage(driver)
     alerts_context_page.wait_for_open()
 
-    alerts_context_page.click_field()
+    alerts_context_page.right_click_field()
     text_alert = driver.get_text()
 
     assert text_alert == "You selected a context menu",\
@@ -15,4 +15,4 @@ def test_alerts_and_context_click(driver):
 
     driver.confirm()
 
-    assert alerts_context_page.is_alert_closed(), "alert not close"
+    driver.is_alert_closed()

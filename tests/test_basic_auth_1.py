@@ -1,13 +1,13 @@
-from utils.config_utils import JsonUtils
+from utils.config_utils import ConfigUtils
 from pages.basic_auth_page import BasicAuthPage
-
-USERNAME = "admin"
-PASSWORD = "admin"
+import pytest
 
 
-def test_basic_auth(driver):
-    driver.get(JsonUtils.get_attribute("url_basic_authorization_1")
-               .format(USERNAME, PASSWORD))
+@pytest.mark.parametrize("param", [("admin", "admin")])
+def test_basic_auth(driver, param):
+    username, password = param
+    driver.get(ConfigUtils.get_attribute("url_basic_authorization_1")
+               .format(username, password))
     authorization_page = BasicAuthPage(driver)
 
     assert authorization_page.get_text_result() ==\

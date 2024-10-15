@@ -1,9 +1,10 @@
-from utils.config_utils import JsonUtils
+from utils.config_utils import ConfigUtils
 from pages.alerts_page import AlertsPage
+from utils.random_utils import RandomUtils
 
 
-def test_alerts(driver):
-    driver.get(JsonUtils.get_attribute("url_alerts_2_3"))
+def test_alerts_and_js(driver):
+    driver.get(ConfigUtils.get_attribute("url_alerts_2_3"))
     alerts_page = AlertsPage(driver)
     alerts_page.wait_for_open()
 
@@ -37,7 +38,7 @@ def test_alerts(driver):
     assert text_alert_3 == "I am a JS prompt", \
         f"{text_alert_3} The text is missing"
 
-    text = driver.write_text_and_confirm()
+    text = driver.write_text_and_confirm(RandomUtils().random_str(10))
     text_result_3 = alerts_page.get_text_result()
 
     assert text_result_3 == f"You entered: {text}", \

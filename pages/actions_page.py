@@ -8,7 +8,7 @@ class ActionsPage(BasePage):
     UNIQUE_LOC = "//*[@id='content']//input"
 
     ACTIONS_INPUT_LOC = "//*[@id='content']//input"
-    VALUE_LABEL_LOC = "//*[@id='range']"
+    VALUE_LABEL_LOC = "range"
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -28,7 +28,7 @@ class ActionsPage(BasePage):
             self.VALUE_LABEL_LOC,
             description="Actions page -> Value label")
 
-    def random_value(self):
+    def get_random_value(self):
         minimum = float(self.actions_input.get_attribute("min"))
         maximum = float(self.actions_input.get_attribute("max"))
         center = maximum / 2
@@ -48,9 +48,9 @@ class ActionsPage(BasePage):
         else:
             random_value = str(random_value)
 
-        self.actions_input.click_and_hole(random_value_1)
+        self.actions_input.click_and_hold(random_value_1)
 
         return random_value
 
-    def check_value(self):
+    def get_value(self):
         return self.value_label.get_text()

@@ -1,9 +1,9 @@
-from utils.config_utils import JsonUtils
+from utils.config_utils import ConfigUtils
 from pages.dynamic_content_page import DynamicContentPage
 
 
-def test_alerts(driver):
-    driver.get(JsonUtils.get_attribute("url_dynamic_content_10"))
+def test_dynamic_content(driver):
+    driver.get(ConfigUtils.get_attribute("url_dynamic_content_10"))
     dynamic_content_page = DynamicContentPage(driver)
     dynamic_content_page.wait_for_open()
 

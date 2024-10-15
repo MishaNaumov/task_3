@@ -3,18 +3,17 @@ from elements.input import Input
 from elements.label import Label
 from elements.button import Button
 import selenium.common
-import os
 
 
 class UploadImgPage(BasePage):
-    UNIQUE_LOC = "//*[@id='file-upload']"
+    UNIQUE_LOC_1 = "file-upload"
 
-    UPLOAD_INPUT_LOC = "//*[@id='file-upload']"
-    SUBMIT_INPUT_LOC = "//*[@id='file-submit']"
+    UPLOAD_INPUT_LOC = "file-upload"
+    SUBMIT_INPUT_LOC = "file-submit"
     TITLE_LABEL_LOC = "//*[@id='content']//h3"
-    FILENAME_LABEL_LOC = "//*[@id='uploaded-files']"
+    FILENAME_LABEL_LOC = "uploaded-files"
 
-    DROP_UPLOAD_INPUT_LOC = "//*[@id='drag-drop-upload']"
+    DROP_UPLOAD_BUTTON_LOC = "drag-drop-upload"
 
     FILENAME_WINDOW_LABEL_LOC = "//*[@id='drag-drop-upload']" \
                                 "//div[@class='dz-filename']//span"
@@ -26,7 +25,7 @@ class UploadImgPage(BasePage):
 
         self.unique_element = Input(
             self.driver,
-            self.UNIQUE_LOC,
+            self.UNIQUE_LOC_1,
             description="Upload img page -> Upload input"
         )
 
@@ -53,7 +52,7 @@ class UploadImgPage(BasePage):
 
         self.drop_upload_button = Button(
             self.driver,
-            self.DROP_UPLOAD_INPUT_LOC,
+            self.DROP_UPLOAD_BUTTON_LOC,
             description="Upload img page -> Drop upload button"
         )
 
@@ -69,17 +68,13 @@ class UploadImgPage(BasePage):
         )
 
     def upload_file(self, file):
-        self.upload_input.send_keys(f"{os.getcwd()}/{file}")
+        self.upload_input.send_keys(file)
 
     def submit_file(self):
         self.submit_input.click()
 
     def check_new_page(self):
-        try:
-            self.unique_element.presence_wait()
-            return False
-        except selenium.common.TimeoutException:
-            return True
+        self.filename_label.wait_presence()
 
     def get_title_name(self):
         return self.title_label.get_text()
@@ -89,13 +84,6 @@ class UploadImgPage(BasePage):
 
     def click_upload_file(self):
         self.drop_upload_button.click()
-
-    def is_opened_dialog_window(self):
-        try:
-            self.driver.click_js(self.drop_upload_button.click())
-            return False
-        except selenium.common.JavascriptException:
-            return True
 
     def get_file_name_2(self):
         return self.filename_window_label.get_text()

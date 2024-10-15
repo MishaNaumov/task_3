@@ -5,9 +5,9 @@ from elements.label import Label
 class DynamicContentPage(BasePage):
     UNIQUE_LOC = "//*[@id='content']//h3"
 
-    IMG1_LABEL_LOC = "//div[@class='row'][3]//img//preceding::img[2]"
-    IMG2_LABEL_LOC = "//div[@class='row'][3]//img//preceding::img[1]"
-    IMG3_LABEL_LOC = "//div[@class='row'][3]//img"
+    IMG1_LABEL_LOC = "//*[@id='content']/div[@class='row'][1]//img"
+    IMG2_LABEL_LOC = "//*[@id='content']/div[@class='row'][2]//img"
+    IMG3_LABEL_LOC = "//*[@id='content']/div[@class='row'][3]//img"
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -50,9 +50,6 @@ class DynamicContentPage(BasePage):
             self.driver.refresh()
 
     def is_2_img_corrected(self):
-        if (self.get_src_img1() == self.get_src_img2()) or \
+        return (self.get_src_img1() == self.get_src_img2()) or \
                 (self.get_src_img1() == self.get_src_img3()) or \
-                (self.get_src_img2() == self.get_src_img3()):
-            return True
-        else:
-            return False
+                (self.get_src_img2() == self.get_src_img3())

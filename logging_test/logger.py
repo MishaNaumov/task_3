@@ -1,11 +1,23 @@
-from logging_test.logger_config import LoggerConfig
 import logging
 
 
 class Logger:
-    def __init__(self):
-        self.config = LoggerConfig.logger_config_info()
+    LOG_LEVEL = logging.INFO
+    FILENAME = "my_logging.log"
+    ENCODING = "utf-8"
+    FORMAT = "%(levelname)s (%(asctime)s): %(message)s"
 
-    @staticmethod
-    def info(param):
-        logging.info(param)
+    logger = logging.getLogger("log")
+    logger.setLevel(LOG_LEVEL)
+    handler = logging.FileHandler(
+        filename=FILENAME,
+        encoding=ENCODING
+    )
+    handler.setLevel(LOG_LEVEL)
+    formatter = logging.Formatter(FORMAT)
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+
+    @classmethod
+    def info(cls, param):
+        cls.logger.info(param)

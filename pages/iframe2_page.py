@@ -4,26 +4,26 @@ from elements.label import Label
 
 
 class Iframe2Page(BasePage):
-    UNIQUE_LOC = "//*[@id='framesWrapper']"
+    UNIQUE_LOC = "framesWrapper"
 
     NEST_FRAME_WEB_ELEMENT_LOC = "//div[@class='element-list collapse show']" \
-                                 "//li[@id='item-3']"
+                                 "//*[@id='item-3']"
     FRAME_WEB_ELEMENT_LOC = "//div[@class='element-list collapse show']" \
-                            "//li[@id='item-2']"
+                            "//*[@id='item-2']"
     TITLE_NEST_FRAME_LABEL_LOC = "//*[@id='framesWrapper']//h1"
     TITLE_FRAMES_LABEL_LOC = "//*[@id='framesWrapper']//h1"
 
-    PAGE1_IFRAME1_WEB_ELEMENT_LOC = "//iframe[@id='frame1']"
+    PAGE1_IFRAME1_WEB_ELEMENT_LOC = "frame1"
     PAGE1_IFRAME2_WEB_ELEMENT_LOC = "//iframe[not(@id='frame1')]"
 
     PAGE1_IFRAME1_TEXT_WEB_ELEMENT_LOC = "//body"
     PAGE1_IFRAME2_TEXT_WEB_ELEMENT_LOC = "//body//p"
 
-    PAGE2_IFRAME1_WEB_ELEMENT_LOC = "//*[@id='frame1']"
-    PAGE2_IFRAME2_WEB_ELEMENT_LOC = "//*[@id='frame2']"
+    PAGE2_IFRAME1_WEB_ELEMENT_LOC = "frame1"
+    PAGE2_IFRAME2_WEB_ELEMENT_LOC = "frame2"
 
-    PAGE2_IFRAME1_TEXT_WEB_ELEMENT_LOC = "//*[@id='sampleHeading']"
-    PAGE2_IFRAME2_TEXT_WEB_ELEMENT_LOC = "//*[@id='sampleHeading']"
+    PAGE2_IFRAME1_TEXT_WEB_ELEMENT_LOC = "sampleHeading"
+    PAGE2_IFRAME2_TEXT_WEB_ELEMENT_LOC = "sampleHeading"
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -111,26 +111,26 @@ class Iframe2Page(BasePage):
     def get_text_title_frame(self):
         return self.title_frame_label.get_text()
 
-    def page1_switch_iframe1(self):
-        self.driver.frame(self.page1_iframe1_web_element.presence_wait())
+    def switch_iframe1_page1(self):
+        self.driver.switch_frame(self.page1_iframe1_web_element.wait_presence())
 
-    def get_text_page1_iframe1(self):
+    def get_text_iframe1_page1(self):
         return self.page1_iframe1_text_web_element.get_text()
 
-    def page1_switch_iframe2(self):
-        self.driver.frame(self.page1_iframe2_web_element.presence_wait())
+    def switch_iframe2_page1(self):
+        self.driver.switch_frame(self.page1_iframe2_web_element.wait_presence())
 
-    def get_text_page1_iframe2(self):
+    def get_text_iframe2_page1(self):
         return self.page1_iframe1_text_web_element.get_text()
 
-    def page2_switch_iframe1(self):
-        self.driver.frame(self.page2_iframe1_web_element.presence_wait())
+    def switch_iframe1_page2(self):
+        self.driver.switch_frame(self.page2_iframe1_web_element.wait_presence())
 
-    def page2_switch_iframe2(self):
-        self.driver.frame(self.page2_iframe2_web_element.presence_wait())
+    def switch_iframe2_page2(self):
+        self.driver.switch_frame(self.page2_iframe2_web_element.wait_presence())
 
-    def get_text_page2_iframe1(self):
+    def get_text_iframe1_page2(self):
         return self.page2_iframe1_text_web_element.get_text()
 
-    def get_text_page2_iframe2(self):
+    def get_text_iframe2_page2(self):
         return self.page2_iframe1_text_web_element.get_text()

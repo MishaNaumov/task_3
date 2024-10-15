@@ -34,7 +34,7 @@ class InfinityScrollPage(BasePage):
 
     def scroll(self):
         while True:
-            self.driver.scroll_down(self.paragraph_label.presence_wait())
+            self.paragraph_label.scroll_down()
             src = self.driver.get_page_source()
             soup = BeautifulSoup(src, "html.parser")
             if len(soup.find_all(class_="jscroll-added")) == 23:
