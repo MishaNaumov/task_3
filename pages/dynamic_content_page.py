@@ -5,9 +5,9 @@ from elements.label import Label
 class DynamicContentPage(BasePage):
     UNIQUE_LOC = "//*[@id='content']//h3"
 
-    IMG1_LABEL_LOC = "//*[@id='content']/div[@class='row'][1]//img"
-    IMG2_LABEL_LOC = "//*[@id='content']/div[@class='row'][2]//img"
-    IMG3_LABEL_LOC = "//*[@id='content']/div[@class='row'][3]//img"
+    IMG1_LABEL_LOC = "(//div[contains(@class, 'large-2')]//img)[1]"
+    IMG2_LABEL_LOC = "(//div[contains(@class, 'large-2')]//img)[2]"
+    IMG3_LABEL_LOC = "(//div[contains(@class, 'large-2')]//img)[3]"
 
     def __init__(self, driver):
         super().__init__(driver)

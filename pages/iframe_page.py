@@ -4,6 +4,7 @@ from elements.webelement import WebElement
 from elements.custom_input import CustomInput
 from elements.button import Button
 import selenium.common
+from selenium.webdriver.common.keys import Keys
 
 
 class IframePage(BasePage):
@@ -115,7 +116,10 @@ class IframePage(BasePage):
         return self.text_style_label.get_attribute("style")
 
     def select_half_text(self):
-        self.field_input.select_half_text()
+        half_text = int(len(self.text_style_label.get_text())/2)
+
+        self.field_input.key_down(Keys.SHIFT)
+        self.field_input.send_keys(Keys.LEFT * half_text)
 
     def turn_text_8pt(self):
         self.front_size_button.click()

@@ -8,7 +8,7 @@ import os.path
 @pytest.mark.parametrize("param", ["photo.png"])
 def test_upload_img_and_dialog_window(driver, param):
     file = param
-    driver.get(ConfigUtils.get_attribute("url_upload_image_12_13_14"))
+    driver.get(ConfigUtils.get_attribute("url_upload_image_12_13"))
     upload_img_page = UploadImgPage(driver)
     upload_img_page.wait_for_open()
 

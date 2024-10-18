@@ -1,7 +1,7 @@
 from pages.base_page import BasePage
 from elements.input import Input
 from elements.label import Label
-import random
+from selenium.webdriver.common.keys import Keys
 
 
 class ActionsPage(BasePage):
@@ -28,29 +28,20 @@ class ActionsPage(BasePage):
             self.VALUE_LABEL_LOC,
             description="Actions page -> Value label")
 
-    def get_random_value(self):
-        minimum = float(self.actions_input.get_attribute("min"))
-        maximum = float(self.actions_input.get_attribute("max"))
-        center = maximum / 2
+    def set_value(self, value):
+        start_value = 2.5
+        step_value = 0.5
 
-        list_value = [i / 2 for i in range(int(minimum) + 1, int(maximum) * 2)]
-        random_value = random.choice(list_value)
+        delta = int((value - start_value) / step_value)
 
-        if random_value > center:
-            random_value_1 = ((random_value - center) / 0.5) * 11
-        elif random_value < center:
-            random_value_1 = ((center - random_value) / 0.5) * (-10)
-        else:
-            random_value_1 = 0
+        self.actions_input.send_keys(
+            (Keys.RIGHT if delta > 0 else Keys.LEFT) * abs(delta))
 
-        if random_value.is_integer():
-            random_value = str(int(random_value))
-        else:
-            random_value = str(random_value)
+        return str(int(value)) if value.is_integer() else str(value)
 
-        self.actions_input.click_and_hold(random_value_1)
-
-        return random_value
+    def move_action(self, arg):
+        self.actions_input.click_and_hold()
+        return self.set_value(arg)
 
     def get_value(self):
         return self.value_label.get_text()

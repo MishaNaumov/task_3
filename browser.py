@@ -34,10 +34,6 @@ class Browser:
         Logger().info("refresh page")
         self.driver.refresh()
 
-    def get_page_source(self):
-        Logger().info("get page source")
-        return self.driver.page_source
-
     def switch_last_window(self):
         Logger().info("switch last window")
         self.driver.switch_to.window(self.driver.window_handles[-1])

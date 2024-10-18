@@ -1,5 +1,6 @@
 from utils.config_utils import ConfigUtils
 from pages.actions_page import ActionsPage
+from utils.random_utils import RandomUtils
 
 
 def test_actions(driver):
@@ -7,6 +8,6 @@ def test_actions(driver):
     actions_page = ActionsPage(driver)
     actions_page.wait_for_open()
 
-    value = actions_page.get_random_value()
+    value = actions_page.move_action(RandomUtils.random_value())
 
     assert value == actions_page.get_value(), "Incorrect value is displayed"

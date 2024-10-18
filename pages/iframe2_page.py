@@ -112,22 +112,26 @@ class Iframe2Page(BasePage):
         return self.title_frame_label.get_text()
 
     def switch_iframe1_page1(self):
-        self.driver.switch_frame(self.page1_iframe1_web_element.wait_presence())
+        self.driver.switch_frame(
+            self.page1_iframe1_web_element.wait_presence())
 
     def get_text_iframe1_page1(self):
         return self.page1_iframe1_text_web_element.get_text()
 
     def switch_iframe2_page1(self):
-        self.driver.switch_frame(self.page1_iframe2_web_element.wait_presence())
+        self.driver.switch_frame(
+            self.page1_iframe2_web_element.wait_presence())
 
     def get_text_iframe2_page1(self):
         return self.page1_iframe1_text_web_element.get_text()
 
     def switch_iframe1_page2(self):
-        self.driver.switch_frame(self.page2_iframe1_web_element.wait_presence())
+        self.driver.switch_frame(
+            self.page2_iframe1_web_element.wait_presence())
 
     def switch_iframe2_page2(self):
-        self.driver.switch_frame(self.page2_iframe2_web_element.wait_presence())
+        self.driver.switch_frame(
+            self.page2_iframe2_web_element.wait_presence())
 
     def get_text_iframe1_page2(self):
         return self.page2_iframe1_text_web_element.get_text()

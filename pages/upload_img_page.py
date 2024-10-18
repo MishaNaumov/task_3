@@ -2,7 +2,6 @@ from pages.base_page import BasePage
 from elements.input import Input
 from elements.label import Label
 from elements.button import Button
-import selenium.common
 
 
 class UploadImgPage(BasePage):

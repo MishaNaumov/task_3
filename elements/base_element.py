@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from logging_test.logger import Logger
 
 
+
 class BaseElement:
     def __init__(self, driver, loc, description):
         self.driver = driver
@@ -74,17 +75,16 @@ class BaseElement:
         ActionChains(self.driver.driver).double_click(
             self.wait_presence()).perform()
 
-    def click_and_hold(self, value):
+    def click_and_hold(self):
         Logger().info(f"{self.description}: click and hold")
         ActionChains(self.driver.driver).click_and_hold(
-            self.wait_presence()).move_by_offset(value, 0).release().perform()
+            self.wait_presence()).perform()
 
     def move_to_element(self):
         Logger().info(f"{self.description}: move to element")
         ActionChains(self.driver.driver).move_to_element(
             self.wait_presence()).perform()
 
-    def select_half_text(self):
-        Logger().info(f"{self.description}: select half text")
-        ActionChains(self.driver.driver).click_and_hold(
-            self.wait_presence()).move_by_offset(850, 0).release().perform()
+    def key_down(self, arg):
+        Logger().info(f"{self.description}: key down")
+        ActionChains(self.driver.driver).key_down(arg).perform()

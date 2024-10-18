@@ -10,10 +10,7 @@ def test_infinity_scroll(driver, param):
     infinity_scroll_page = InfinityScrollPage(driver)
     infinity_scroll_page.wait_for_open()
 
-    count_paragraph = infinity_scroll_page.scroll()
+    count_paragraph = infinity_scroll_page.scroll_until_paragraph(age)
 
     assert count_paragraph == age,\
         f"{count_paragraph} The number of paragraphs does not match the age"
-
-
-

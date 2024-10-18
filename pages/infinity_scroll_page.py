@@ -8,6 +8,7 @@ class InfinityScrollPage(BasePage):
 
     PARAGRAPH_LABEL_LOC = "//div[@class='jscroll-added'][last()]"
     PARAGRAPH_23_LABEL_LOC = "//div[@class='jscroll-added'][23]"
+    ALL_PARAGRAPHS_LABEL_LOC = "//div[@class='jscroll-inner']"
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -19,24 +20,30 @@ class InfinityScrollPage(BasePage):
                         " -> Infinite Scroll label"
         )
 
-        self.paragraph_label = Label(
+        self.paragraph_last_label = Label(
             self.driver,
             self.PARAGRAPH_LABEL_LOC,
             description="Infinite Scroll page"
-                        " -> Paragraph label"
+                        " -> Paragraph last label"
         )
         self.paragraph_23_label = Label(
             self.driver,
             self.PARAGRAPH_23_LABEL_LOC,
             description="Infinite Scroll page"
-                        " -> Paragraph label"
+                        " -> Paragraph 23 label"
+        )
+        self.all_paragraphs_label = Label(
+            self.driver,
+            self.ALL_PARAGRAPHS_LABEL_LOC,
+            description="Infinite Scroll page"
+                        " -> All paragraph label"
         )
 
-    def scroll(self):
+    def scroll_until_paragraph(self, paragraph):
         while True:
-            self.paragraph_label.scroll_down()
-            src = self.driver.get_page_source()
+            self.paragraph_last_label.scroll_down()
+            src = self.all_paragraphs_label.get_attribute("innerHTML")
             soup = BeautifulSoup(src, "html.parser")
-            if len(soup.find_all(class_="jscroll-added")) == 23:
+            if len(soup.find_all(class_="jscroll-added")) == paragraph:
                 break
         return len(soup.find_all(class_="jscroll-added"))
