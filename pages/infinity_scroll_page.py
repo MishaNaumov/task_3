@@ -39,11 +39,11 @@ class InfinityScrollPage(BasePage):
                         " -> All paragraph label"
         )
 
-    def scroll_until_paragraph(self, paragraph):
+    def scroll_until_paragraph(self, paragraph_count):
         while True:
             self.paragraph_last_label.scroll_down()
             src = self.all_paragraphs_label.get_attribute("innerHTML")
             soup = BeautifulSoup(src, "html.parser")
-            if len(soup.find_all(class_="jscroll-added")) == paragraph:
+            if len(soup.find_all(class_="jscroll-added")) == paragraph_count:
                 break
         return len(soup.find_all(class_="jscroll-added"))

@@ -6,9 +6,9 @@ from elements.label import Label
 class Iframe2Page(BasePage):
     UNIQUE_LOC = "framesWrapper"
 
-    NEST_FRAME_WEB_ELEMENT_LOC = "//div[@class='element-list collapse show']" \
+    NEST_FRAME_WEB_ELEMENT_LOC = "//div[contains(@class,'show')]" \
                                  "//*[@id='item-3']"
-    FRAME_WEB_ELEMENT_LOC = "//div[@class='element-list collapse show']" \
+    FRAME_WEB_ELEMENT_LOC = "//div[contains(@class,'show')]" \
                             "//*[@id='item-2']"
     TITLE_NEST_FRAME_LABEL_LOC = "//*[@id='framesWrapper']//h1"
     TITLE_FRAMES_LABEL_LOC = "//*[@id='framesWrapper']//h1"

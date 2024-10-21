@@ -1,7 +1,7 @@
 from pages.base_page import BasePage
 from elements.label import Label
 from elements.webelement import WebElement
-from elements.custom_input import CustomInput
+from custom_elements.text_editor_input import TextEditorInput
 from elements.button import Button
 import selenium.common
 from selenium.webdriver.common.keys import Keys
@@ -37,7 +37,7 @@ class IframePage(BasePage):
             self.IFRAME_WEB_ELEMENT_LOC,
             description="Iframe page -> Iframe web element"
         )
-        self.field_input = CustomInput(
+        self.field_input = TextEditorInput(
             self.driver,
             self.FIELD_INPUT_LOC,
             description="Iframe page -> Field web element"
@@ -118,6 +118,7 @@ class IframePage(BasePage):
     def select_half_text(self):
         half_text = int(len(self.text_style_label.get_text())/2)
 
+        self.field_input.send_keys(Keys.CONTROL + Keys.RIGHT)
         self.field_input.key_down(Keys.SHIFT)
         self.field_input.send_keys(Keys.LEFT * half_text)
 
@@ -137,7 +138,7 @@ class IframePage(BasePage):
 
     def is_clear_format(self):
         try:
-            self.text_style_label.is_displayed()
+            self.text_style_label.wait_presence()
             return False
         except selenium.common.TimeoutException:
             return True

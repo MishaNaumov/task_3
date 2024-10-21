@@ -15,7 +15,8 @@ def test_iframe(driver):
     iframe_page.send_keys_random(send_text)
     page_text = iframe_page.get_text()
 
-    assert send_text == page_text, f"{send_text} The text is missing"
+    assert send_text == page_text,\
+        f"AR:{page_text} ER:{send_text} The text is missing"
 
     iframe_page.select_all_text_bold()
 

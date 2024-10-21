@@ -1,6 +1,7 @@
 from utils.config_utils import ConfigUtils
 from pages.iframe_page import IframePage
 from utils.random_utils import RandomUtils
+from utils.dict_utils import DictUtils
 
 
 def test_iframe_pro(driver):
@@ -18,18 +19,20 @@ def test_iframe_pro(driver):
     iframe_page.align_text_right()
 
     iframe_page.switch_iframe1()
-    style_text = iframe_page.get_style_text()[-6:-1]
+    style_text = iframe_page.get_style_text()
+    style_dict = DictUtils.get_value(style_text)
 
-    assert style_text == "right", "Text not on right side"
+    assert style_dict["text-align"] == "right", "Text not on right side"
 
     iframe_page.select_half_text()
     driver.switch_to_default_content()
     iframe_page.turn_text_8pt()
 
     iframe_page.switch_iframe1()
-    font_size_text = iframe_page.get_font_size_text()[-4:-1]
+    font_size_text = iframe_page.get_font_size_text()
+    font_size_dict = DictUtils.get_value(font_size_text)
 
-    assert font_size_text == "8pt", "Text is not 8pt"
+    assert font_size_dict["font-size"] == "8pt", "Text is not 8pt"
 
     iframe_page.create_new_file()
     text_iframe = iframe_page.get_text()

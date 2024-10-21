@@ -1,3 +1,5 @@
+import time
+
 from pages.base_page import BasePage
 from elements.input import Input
 from elements.label import Label

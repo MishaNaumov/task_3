@@ -31,17 +31,17 @@ class ActionsPage(BasePage):
     def set_value(self, value):
         start_value = 2.5
         step_value = 0.5
+        value = value / 10
 
         delta = int((value - start_value) / step_value)
 
         self.actions_input.send_keys(
             (Keys.RIGHT if delta > 0 else Keys.LEFT) * abs(delta))
-
-        return str(int(value)) if value.is_integer() else str(value)
+        return value
 
     def move_action(self, arg):
         self.actions_input.click_and_hold()
         return self.set_value(arg)
 
     def get_value(self):
-        return self.value_label.get_text()
+        return float(self.value_label.get_text())

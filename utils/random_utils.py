@@ -10,9 +10,6 @@ class RandomUtils:
         return ''.join(random.sample(letters_and_digits, lens))
 
     @staticmethod
-    def random_value():
-        min_value = 5
-        max_value = 45
-        step = 5
-        return random.randrange(min_value, max_value, step)/5/2
+    def random_value(min_value, max_value, step):
+        return random.randrange(min_value, max_value, step)
 

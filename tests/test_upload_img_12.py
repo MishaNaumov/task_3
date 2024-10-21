@@ -4,9 +4,8 @@ import pytest
 import os
 
 
-@pytest.mark.parametrize("param", ["photo.png"])
-def test_upload_img(driver, param):
-    file = param
+@pytest.mark.parametrize("file", ["photo.png"])
+def test_upload_img(driver, file):
     driver.get(ConfigUtils.get_attribute("url_upload_image_12_13"))
     upload_img_page = UploadImgPage(driver)
     upload_img_page.wait_for_open()

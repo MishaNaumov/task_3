@@ -8,6 +8,6 @@ def test_actions(driver):
     actions_page = ActionsPage(driver)
     actions_page.wait_for_open()
 
-    value = actions_page.move_action(RandomUtils.random_value())
+    value = actions_page.move_action(RandomUtils.random_value(5, 45, 5))
 
     assert value == actions_page.get_value(), "Incorrect value is displayed"

@@ -1,23 +1,19 @@
 from utils.config_utils import ConfigUtils
 from pages.upload_img_page import UploadImgPage
-from utils.dialog_window import DialogWindow
+from utils.dialog_window_utils import DialogWindowUtils
 import pytest
 import os.path
 
 
-@pytest.mark.parametrize("param", ["photo.png"])
-def test_upload_img_and_dialog_window(driver, param):
-    file = param
+@pytest.mark.parametrize("file", ["photo.png"])
+def test_upload_img_and_dialog_window(driver, file):
     driver.get(ConfigUtils.get_attribute("url_upload_image_12_13"))
     upload_img_page = UploadImgPage(driver)
     upload_img_page.wait_for_open()
 
     upload_img_page.click_upload_file()
 
-    assert DialogWindow.is_opened_dialog_window(
-        f"C{os.getcwd()}\photo\{file}"), "Dialog window did not open"
-
-    DialogWindow.enter()
+    DialogWindowUtils.write_and_enter(f"{os.getcwd()}\photo\{file}")
 
     file_name = upload_img_page.get_file_name_2()
 

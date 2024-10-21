@@ -3,8 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
 from utils.config_utils import ConfigUtils
 from selenium.webdriver.common.by import By
-from logging_test.logger import Logger
-
+from logger.logger import Logger
 
 
 class BaseElement:
@@ -40,51 +39,51 @@ class BaseElement:
         )
 
     def click(self):
-        Logger().info(f"{self.description}: click")
+        Logger.info(f"{self.description}: click")
         self.wait_clickable().click()
 
     def click_js(self):
-        Logger().info("click js")
+        Logger.info(f"{self.description}: сlick js")
         self.driver.driver.execute_script("arguments[0].click();",
                                           self.wait_presence())
 
     def scroll_down(self):
-        Logger().info("scroll down")
+        Logger.info(f"{self.description}: scroll down")
         self.driver.driver.execute_script("arguments[0].scrollIntoView();",
                                           self.wait_presence())
 
     def get_text(self):
-        Logger().info(f"{self.description}: get text")
+        Logger.info(f"{self.description}: get text")
         return self.wait_presence().text
 
     def is_displayed(self):
-        Logger().info(f"{self.description}: visible on the display")
+        Logger.info(f"{self.description}: visible on the display")
         return self.wait_presence().is_displayed()
 
     def get_attribute(self, arg):
-        Logger().info(f"{self.description}: get attribute")
+        Logger.info(f"{self.description}: get attribute '{arg}'")
         return self.wait_presence().get_attribute(arg)
 
     def right_click(self):
-        Logger().info(f"{self.description}: right click")
+        Logger.info(f"{self.description}: right click")
         ActionChains(self.driver.driver).context_click(
             self.wait_presence()).perform()
 
     def double_click(self):
-        Logger().info(f"{self.description}: double click")
+        Logger.info(f"{self.description}: double click")
         ActionChains(self.driver.driver).double_click(
             self.wait_presence()).perform()
 
     def click_and_hold(self):
-        Logger().info(f"{self.description}: click and hold")
+        Logger.info(f"{self.description}: click and hold")
         ActionChains(self.driver.driver).click_and_hold(
-            self.wait_presence()).perform()
+            self.wait_presence()).release().perform()
 
     def move_to_element(self):
-        Logger().info(f"{self.description}: move to element")
+        Logger.info(f"{self.description}: move to element")
         ActionChains(self.driver.driver).move_to_element(
             self.wait_presence()).perform()
 
     def key_down(self, arg):
-        Logger().info(f"{self.description}: key down")
+        Logger.info(f"{self.description}: key down")
         ActionChains(self.driver.driver).key_down(arg).perform()
