@@ -6,9 +6,9 @@ class Logger:
     FILENAME = "my_logging.log"
     ENCODING = "utf-8"
     FORMAT = "%(levelname)s (%(asctime)s): %(message)s"
-    NAME_LOG = "log"
+    LOG_NAME = "log"
 
-    logger = logging.getLogger(NAME_LOG)
+    logger = logging.getLogger(LOG_NAME)
     logger.setLevel(LOG_LEVEL)
     handler = logging.FileHandler(
         filename=FILENAME,
